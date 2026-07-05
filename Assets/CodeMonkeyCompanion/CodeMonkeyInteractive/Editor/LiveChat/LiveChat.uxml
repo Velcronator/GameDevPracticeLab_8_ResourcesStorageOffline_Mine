@@ -1,0 +1,25 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/CodeMonkeyCompanion/CodeMonkeyInteractive/Editor/LiveChat/LiveChat.uss?fileID=7433441132597879392&amp;guid=7835e27ea7bfae744bd4ee1ff6b03523&amp;type=3#LiveChat"/>
+    <ui:VisualElement name="onlineContainer" style="flex-grow: 0; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-shrink: 0;">
+        <ui:Label text="I&apos;m &lt;u&gt;ONLINE&lt;/u&gt; right now!&#10;Need help with anything? Ask me!" name="onlineLabel" style="-unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-align: upper-center; background-color: rgb(70, 70, 70); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; white-space: normal;"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="loginContainer" style="flex-grow: 1;">
+        <ui:Label text="Login with your Email" style="-unity-text-align: upper-center; -unity-font-style: bold;"/>
+        <ui:TextField label="Email" name="emailTextField"/>
+        <ui:Button text="Login" name="loginButton"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="chatContainer" style="flex-grow: 1;">
+        <ui:Label text="email@email.com" name="usedEmailLabel" style="-unity-font-style: bold; -unity-text-align: upper-center;"/>
+        <ui:VisualElement style="flex-grow: 0; flex-direction: row-reverse; margin-top: 4px; margin-bottom: 4px; flex-shrink: 0;">
+            <ui:Button text="SEND" parse-escape-sequences="true" display-tooltip-when-elided="true" name="sendMessageButton" style="flex-grow: 0;"/>
+            <ui:TextField picking-mode="Ignore" name="inputTextField" style="font-size: 12px; flex-grow: 1;"/>
+        </ui:VisualElement>
+        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1">
+            <ui:VisualElement name="textVisualElement" style="flex-grow: 1;"/>
+            <ui:Label tabindex="-1" text="..." parse-escape-sequences="true" display-tooltip-when-elided="true" name="chatLabel" enable-rich-text="true" selectable="true" focusable="true" style="font-size: 12px; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; white-space: normal; display: flex; -unity-paragraph-spacing: 100px;"/>
+        </ui:ScrollView>
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 0; flex-shrink: 0; margin-top: 10px; margin-bottom: 5px;">
+        <ui:Label text="By the way, this is genuinely me, it&apos;s not an AI bot, that&apos;s why I can&apos;t be online 24/7" style="-unity-text-align: upper-center; font-size: 10px; -unity-font-style: bold-and-italic; white-space: normal;"/>
+    </ui:VisualElement>
+</ui:UXML>

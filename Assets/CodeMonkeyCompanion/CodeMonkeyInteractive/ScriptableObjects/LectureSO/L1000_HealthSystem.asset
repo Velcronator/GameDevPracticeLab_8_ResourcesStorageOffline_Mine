@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f6a93b863ca8314695b382c0c8c2b3d, type: 3}
+  m_Name: L1000_HealthSystem
+  m_EditorClassIdentifier: 
+  lectureCode: 10
+  lectureNumber: 01
+  lectureName: HealthSystem
+  lectureTitle: Health System
+  exerciseListSO: {fileID: 11400000, guid: 1d22a8d3ba87f9a4a8aa6007b1a70abb, type: 2}
+  lectureDescription: 'Health System capable of storing Health, dealing Damage, and
+    Healing.
+
+
+    In the Scenario you can click with the Mouse to Shoot a Bullet
+    at the Enemy which should Damage it.'
