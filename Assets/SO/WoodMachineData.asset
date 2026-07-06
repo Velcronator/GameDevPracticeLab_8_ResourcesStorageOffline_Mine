@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6835250b4375cf9499ac808be308419f, type: 3}
+  m_Name: WoodMachineData
+  m_EditorClassIdentifier: Assembly-CSharp::MachineData
+  machineName: 1
+  prefab: {fileID: 8517279926703747184, guid: 4ca39335441cc9546b0db1c77474574d, type: 3}
+  outputType: 0
+  productionInterval: 1
+  amountPerTick: 1
