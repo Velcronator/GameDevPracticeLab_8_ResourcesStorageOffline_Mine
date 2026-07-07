@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerThirdPersonCharacterController : MonoBehaviour {
 
-
+    [SerializeField] private AnimatorEventBridge animatorEventBridge;
     [SerializeField] private float moveSpeed = 20f;
     [SerializeField] private float jumpForce;
     [SerializeField] private float gravityForce;
@@ -12,14 +12,39 @@ public class PlayerThirdPersonCharacterController : MonoBehaviour {
     private CharacterController characterController;
     private float characterVelocityY;
     private float lastMoveTimer;
+    private bool canMove = true;
 
 
     private void Awake() {
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+        canMove = true;
+    }
+
+    private void OnEnable()
+    {
+        animatorEventBridge.OnPickupStart += AnimatorEventBridge_OnPickupStart;
+        animatorEventBridge.OnPickupComplete += AnimatorEventBridge_OnPickupComplete;
+    }
+
+    private void OnDisable()
+    {
+        animatorEventBridge.OnPickupStart -= AnimatorEventBridge_OnPickupStart;
+        animatorEventBridge.OnPickupComplete -= AnimatorEventBridge_OnPickupComplete;
+    }
+
+    private void AnimatorEventBridge_OnPickupComplete()
+    {
+        canMove = true;
+    }
+
+    private void AnimatorEventBridge_OnPickupStart()
+    {
+        canMove = false;
     }
 
     private void Update() {
+        if (!canMove) return; 
         HandleCharacterMovement();
     }
 
@@ -70,11 +95,14 @@ public class PlayerThirdPersonCharacterController : MonoBehaviour {
         return lastMoveTimer;
     }
 
-    private bool IsInputJumpDown() {
+    private bool IsInputJumpDown() 
+    {
         return Keyboard.current.spaceKey.wasPressedThisFrame;
     }
 
-    public void Move(Vector3 moveVector) {
+    public void Move(Vector3 moveVector) 
+    {
+        if (!canMove) return;
         characterController.Move(moveVector * Time.deltaTime);
     }
 

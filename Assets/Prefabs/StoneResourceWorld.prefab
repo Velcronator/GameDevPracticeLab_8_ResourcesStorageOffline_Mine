@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3862356403571114931}
   - component: {fileID: 3008456731238306050}
+  - component: {fileID: -8614733204982322937}
+  - component: {fileID: 3220022542484278990}
   m_Layer: 0
   m_Name: StoneResourceWorld
   m_TagString: Untagged
@@ -60,6 +62,41 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8614733204982322937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6125276121533300281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8398d0a2b0fcdb841bafb193ab503bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResourcePickup
+  type: 1
+  amount: 1
+--- !u!65 &3220022542484278990
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6125276121533300281}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0.0005611181, y: -0.03538792, z: 0.12845325}
 --- !u!1 &6354695071906593681
 GameObject:
   m_ObjectHideFlags: 0

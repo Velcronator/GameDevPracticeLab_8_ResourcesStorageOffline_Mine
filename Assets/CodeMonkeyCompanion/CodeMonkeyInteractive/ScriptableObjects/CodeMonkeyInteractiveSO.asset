@@ -27,7 +27,7 @@ MonoBehaviour:
   defaultScene: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
   activeExerciseSO: {fileID: 0}
   lastSelectedLectureSO: {fileID: 11400000, guid: 790c70be8e2ecba4ba9dd582fe90022b, type: 2}
-  checkedLastUpdateTimestamp: 1783215450
+  checkedLastUpdateTimestamp: 1783393983
   lastUpdateVersion: 1.00
   lastQOTDResponse:
     questionId: 283
@@ -63,7 +63,7 @@ MonoBehaviour:
   websiteDynamicMessage:
     text: <u>Fresh Assets on Sale!</u>
     url: https://cmonkey.co/unityassetstore
-  websiteDynamicMessageTimestamp: 1783215450
+  websiteDynamicMessageTimestamp: 1783391069
   websiteLatestVideos:
     videos:
     - youTubeId: ngQCio7raFY
@@ -74,7 +74,7 @@ MonoBehaviour:
       title: How to make $50 MILLION Indie Game (MECCHA CHAMELEON)
     - youTubeId: YMZSa1CzQGk
       title: TOP 10 NEW Systems and Tools JUNE 2026! | Unity Asset Store
-  websiteLatestVideosTimestamp: 1783215450
+  websiteLatestVideosTimestamp: 1783391069
   lastChatAIQuestionAsked: Is Unity good for making 2D games?
   lastChatAIQuestionAnswer: 'Unity is great for making 2D games! It provides a wide
     range of tools and features specifically designed for 2D game development. Unity''s

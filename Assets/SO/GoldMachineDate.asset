@@ -15,5 +15,5 @@ MonoBehaviour:
   machineName: 2
   prefab: {fileID: 7375599628832103319, guid: 8a2543280dee1094cb80f9d7c2419020, type: 3}
   outputType: 2
-  productionInterval: 5
+  productionInterval: 10
   amountPerTick: 1

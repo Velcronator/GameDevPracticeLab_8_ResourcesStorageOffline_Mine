@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8191831531890235005}
   - component: {fileID: 4501304981468107881}
+  - component: {fileID: -4251084131600860859}
+  - component: {fileID: 2140448977909127512}
   m_Layer: 0
   m_Name: GoldResourceWorld
   m_TagString: Untagged
@@ -60,6 +62,41 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4251084131600860859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418190045750973237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8398d0a2b0fcdb841bafb193ab503bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResourcePickup
+  type: 2
+  amount: 1
+--- !u!65 &2140448977909127512
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418190045750973237}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Center: {x: -0, y: -0.042132672, z: 0.04631237}
 --- !u!1 &8198620585403116457
 GameObject:
   m_ObjectHideFlags: 0
