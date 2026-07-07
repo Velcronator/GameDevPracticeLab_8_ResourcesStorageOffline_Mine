@@ -6530,6 +6530,8 @@ GameObject:
   - component: {fileID: 836121544}
   - component: {fileID: 836121543}
   - component: {fileID: 836121545}
+  - component: {fileID: 836121546}
+  - component: {fileID: 836121547}
   m_Layer: 5
   m_Name: Bank and Inventory Menu Panel
   m_TagString: Untagged
@@ -6612,6 +6614,34 @@ MonoBehaviour:
   stoneAmount: {fileID: 1572922197}
   woodAmount: {fileID: 1733017061}
   goldAmount: {fileID: 487806217}
+--- !u!114 &836121546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836121541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d23810d19b53c534ab32527c7dcada9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  bankVisualUGUI: {fileID: 1359494790}
+  stoneAmount: {fileID: 1028443685}
+  woodAmount: {fileID: 908983417}
+  goldAmount: {fileID: 1516889634}
+--- !u!114 &836121547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836121541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 884433c5116c5c641ae8eccfaa6552d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!4 &840237706 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6402151273044722795, guid: 05888ff634318fe4c895146ca5641465, type: 3}

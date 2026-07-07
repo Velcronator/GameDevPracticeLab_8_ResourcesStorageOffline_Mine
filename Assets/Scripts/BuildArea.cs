@@ -22,7 +22,7 @@ public class BuildArea : MonoBehaviour, IInteractable
         boxCollider = GetComponent<BoxCollider>();
     }
 
-    public void Interact()
+    public void Interact(PlayerInteractionSystem interactor)
     {
         if (!hasMachineBuilt)
         {

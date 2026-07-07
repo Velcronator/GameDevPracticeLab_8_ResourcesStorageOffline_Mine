@@ -59,9 +59,12 @@ public class PlayerInventory : MonoBehaviour
     {
         int amount = GetResourceAmount(type);
 
+        if (amount <= 0)
+            return 0;
+
         resources[type] = 0;
 
-        OnResourceAmountChanged?.Invoke(type, 0);
+        OnResourceAmountChanged.Invoke(type, 0);
 
         return amount;
     }

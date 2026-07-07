@@ -7,7 +7,6 @@ public class PlayerInteractionSystem : MonoBehaviour {
 
     public static PlayerInteractionSystem Instance { get; private set; }
 
-
     private IInteractable canInteractable;
 
 
@@ -18,9 +17,10 @@ public class PlayerInteractionSystem : MonoBehaviour {
     private void Update() {
         HandleCanInteractable();
 
+
         if (Keyboard.current.eKey.wasPressedThisFrame) {
             if (canInteractable != null) {
-                canInteractable.Interact();
+                canInteractable.Interact(Instance);
             }
         }
     }
