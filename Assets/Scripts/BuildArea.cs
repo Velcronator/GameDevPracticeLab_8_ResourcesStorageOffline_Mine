@@ -32,10 +32,6 @@ public class BuildArea : MonoBehaviour, IInteractable
 
     void Build()
     {
-        foreach (GameObject go in visuals)
-        {
-            go.SetActive(false);
-        }
         BuildMenuUI.Instance.Show(this, availableMachines);
     }
 
@@ -52,8 +48,26 @@ public class BuildArea : MonoBehaviour, IInteractable
         hasMachineBuilt = true;
     }
 
-    public void BuildMachine(MachineData machineData)
+    public bool BuildMachine(MachineData machineData)
     {
+        if (!Bank.Instance.TrySpend(machineData.BuildCosts))
+        {
+            Debug.Log("Not enough resources.");
+            return false;
+        }
+
+        DisableVisualsForBuildArea();
+
         StartCoroutine(BuildMachineCoroutine(machineData));
+        return true;
+    }
+
+    private void DisableVisualsForBuildArea()
+    {
+        foreach (GameObject go in visuals)
+        {
+            go.SetActive(false);
+        }
+
     }
 }

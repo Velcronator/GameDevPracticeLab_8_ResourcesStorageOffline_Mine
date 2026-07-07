@@ -17,3 +17,6 @@ MonoBehaviour:
   outputType: 1
   productionInterval: 5
   amountPerTick: 1
+  buildCosts:
+  - resourceType: 1
+    amount: 3

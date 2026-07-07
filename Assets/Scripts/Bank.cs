@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class Bank : MonoBehaviour, IInteractable
 {
+    public static Bank Instance { get; private set; }
+
     public static event Action<ResourceType, int> OnBankChanged;
 
     private readonly Dictionary<ResourceType, int> resources = new();
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
         {
             resources[type] = 0;
@@ -21,21 +31,22 @@ public class Bank : MonoBehaviour, IInteractable
         PlayerInventory inventory = interactor.GetComponent<PlayerInventory>();
 
         if (inventory == null)
-        {
-            Debug.LogWarning("No PlayerInventory found.");
             return;
-        }
 
+        DepositAll(inventory);
+    }
+
+    public void DepositAll(PlayerInventory inventory)
+    {
         foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
         {
             int amount = inventory.RemoveAll(type);
 
-            Deposit(type, amount);
-
-            Debug.Log($"Deposited {amount} {type}");
+            if (amount > 0)
+            {
+                Deposit(type, amount);
+            }
         }
-
-        Debug.Log("Deposited all resources.");
     }
 
     public void Deposit(ResourceType type, int amount)
@@ -68,5 +79,41 @@ public class Bank : MonoBehaviour, IInteractable
         OnBankChanged?.Invoke(type, resources[type]);
 
         return true;
+    }
+
+    public void Spend(IReadOnlyList<ResourceCost> costs)
+    {
+        foreach (ResourceCost cost in costs)
+        {
+            Spend(cost.resourceType, cost.amount);
+        }
+    }
+
+    public bool CanAfford(IReadOnlyList<ResourceCost> costs)
+    {
+        foreach (ResourceCost cost in costs)
+        {
+            if (!HasEnough(cost.resourceType, cost.amount))
+                return false;
+        }
+        return true;
+    }
+
+    public bool TrySpend(IReadOnlyList<ResourceCost> costs)
+    {
+        if (!CanAfford(costs))
+            return false;
+
+        Spend(costs);
+
+        return true;
+    }
+
+    public void PrintContents()
+    {
+        foreach (var pair in resources)
+        {
+            Debug.Log($"{pair.Key}: {pair.Value}");
+        }
     }
 }
