@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6835250b4375cf9499ac808be308419f, type: 3}
   m_Name: WoodMachineData
   m_EditorClassIdentifier: Assembly-CSharp::MachineData
+  machineId: WoodMachine
   machineName: 1
+  icon: {fileID: 0}
   prefab: {fileID: 8517279926703747184, guid: 4ca39335441cc9546b0db1c77474574d, type: 3}
   outputType: 0
   productionInterval: 8

@@ -29,6 +29,8 @@ public class BuildMenuUI : MonoBehaviour
 
         System.Text.StringBuilder builder = new();
 
+        builder.AppendLine("In the bank you have: ");
+
         foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
         {
             builder.AppendLine($"{type}: {Bank.Instance.GetAmount(type)}");

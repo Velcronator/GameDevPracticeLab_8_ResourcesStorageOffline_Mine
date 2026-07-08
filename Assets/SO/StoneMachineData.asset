@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6835250b4375cf9499ac808be308419f, type: 3}
   m_Name: StoneMachineData
   m_EditorClassIdentifier: Assembly-CSharp::MachineData
+  machineId: StoneMachine
   machineName: 0
+  icon: {fileID: 0}
   prefab: {fileID: 963252553917237335, guid: 9b6a655166cb34e4d839407f22cfd19f, type: 3}
   outputType: 1
   productionInterval: 5

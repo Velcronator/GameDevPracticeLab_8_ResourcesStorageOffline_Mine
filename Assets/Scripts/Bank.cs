@@ -109,6 +109,16 @@ public class Bank : MonoBehaviour, IInteractable
         return true;
     }
 
+    public List<ResourceSaveData> GetSaveData()
+    {
+        return null; // TODO
+    }
+
+    public void LoadData(List<ResourceSaveData> data)
+    {
+        // TODO
+    }
+
     public void PrintContents()
     {
         foreach (var pair in resources)

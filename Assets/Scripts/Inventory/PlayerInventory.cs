@@ -77,4 +77,14 @@ public class PlayerInventory : MonoBehaviour
             OnResourceAmountChanged?.Invoke(type, 0);
         }
     }
+
+    public List<ResourceSaveData> GetSaveData()
+    {
+        return null; // TODO
+    }
+
+    public void LoadData(List<ResourceSaveData> data)
+    {
+        // TODO
+    }
 }

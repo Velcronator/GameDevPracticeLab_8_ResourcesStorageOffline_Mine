@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6835250b4375cf9499ac808be308419f, type: 3}
   m_Name: GoldMachineDate
   m_EditorClassIdentifier: Assembly-CSharp::MachineData
+  machineId: GoldMachine
   machineName: 2
+  icon: {fileID: 0}
   prefab: {fileID: 7375599628832103319, guid: 8a2543280dee1094cb80f9d7c2419020, type: 3}
   outputType: 2
   productionInterval: 10

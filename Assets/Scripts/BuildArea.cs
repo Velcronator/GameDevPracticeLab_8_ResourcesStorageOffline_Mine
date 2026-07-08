@@ -43,7 +43,7 @@ public class BuildArea : MonoBehaviour, IInteractable
 
         MachineBase machine = obj.GetComponent<MachineBase>();
         machine.Initialise(machineData);
-        boxCollider.enabled = false;
+        
         yield return buildDelay;
         hasMachineBuilt = true;
     }
@@ -56,6 +56,7 @@ public class BuildArea : MonoBehaviour, IInteractable
             return false;
         }
 
+        boxCollider.enabled = false;
         DisableVisualsForBuildArea();
 
         StartCoroutine(BuildMachineCoroutine(machineData));

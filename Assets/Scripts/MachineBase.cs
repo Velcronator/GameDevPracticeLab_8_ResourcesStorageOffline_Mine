@@ -2,25 +2,17 @@ using UnityEngine;
 
 public class MachineBase : MonoBehaviour
 {
+    [SerializeField] private Transform resourceSpawnPoint;
+
     private MachineData machineData;
-
     private float timer;
-    private int storedAmount;
-    private Bank bank;
+    
+    public MachineData MachineData => machineData;
+    public ResourceType OutputType => machineData.OutputType;
+    public string MachineId => machineData.MachineId;
+    public float ProductionInterval => machineData.ProductionInterval;
 
-    [SerializeField] private float yOffset = 1.5f;
-    [SerializeField] private float zOffset = 1.5f;
 
-
-    public void Initialise(MachineData machineData)
-    {
-        this.machineData = machineData;
-    }
-
-    private void Start()
-    {
-        bank = FindFirstObjectByType<Bank>();
-    }
 
     private void Update()
     {
@@ -28,12 +20,37 @@ public class MachineBase : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (timer >= machineData.ProductionInterval)
+        while (timer >= machineData.ProductionInterval)
         {
-            timer = 0f;
+            timer -= machineData.ProductionInterval;
             Produce();
         }
     }
+
+    public void Initialise(MachineData machineData)
+    {
+        this.machineData = machineData;
+
+        MachineManager.Instance.Register(this);
+    }
+
+    public void Produce(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnResource();
+        }
+    }
+
+    //public MachineSaveData GetSaveData()
+    //{
+    //    return new MachineSaveData
+    //    {
+    //        machineId = MachineId,
+    //        position = transform.position,
+    //        rotation = transform.rotation
+    //    };
+    //}
 
     private void Produce()
     {
@@ -47,27 +64,14 @@ public class MachineBase : MonoBehaviour
     {
         GameObject prefab = ResourceDatabase.Instance.GetPrefab(machineData.OutputType);
 
-        Vector3 spawnPos = transform.position + Random.insideUnitSphere * 0.5f;
-
-        // Ensure the resource spawns above the ground and towards randomly
-        spawnPos.y = Mathf.Max(spawnPos.y, yOffset); // Ensure it spawns above the ground
-        // Ensure it spawns 2 units away from the machine towards the bank
-        Vector3 directionToBank = (bank.transform.position - transform.position).normalized;
-        spawnPos += directionToBank * zOffset;
-
-        Instantiate(prefab, spawnPos, Quaternion.identity);
-
+        Instantiate(prefab, resourceSpawnPoint.position, Quaternion.identity);
     }
 
-    public int Collect()
+    private void OnDestroy()
     {
-        int amount = storedAmount;
-        storedAmount = 0;
-        return amount;
-    }
-
-    public ResourceType GetOutputType()
-    {
-        return machineData.OutputType;
+        if (MachineManager.Instance != null)
+        {
+            MachineManager.Instance.Unregister(this);
+        }
     }
 }
