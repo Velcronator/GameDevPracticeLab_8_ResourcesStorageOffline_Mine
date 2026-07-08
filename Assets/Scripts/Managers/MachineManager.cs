@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MachineManager : MonoBehaviour
+public class MachineManager : MonoBehaviour, ISaveable
 {
     public static MachineManager Instance { get; private set; }
 
@@ -45,4 +45,13 @@ public class MachineManager : MonoBehaviour
         return machines.Count;
     }
 
+    public void PopulateSaveData(GameData data)
+    {
+        Debug.Log("LoadFromSaveData");
+    }
+
+    public void LoadFromSaveData(GameData data)
+    {
+        Debug.Log("LoadFromSaveData");
+    }
 }

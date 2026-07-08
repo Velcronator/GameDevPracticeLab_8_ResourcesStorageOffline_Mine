@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : MonoBehaviour, ISaveable
 {
     public static event Action<ResourceType, int> OnResourceAmountChanged;
 
@@ -19,6 +19,15 @@ public class PlayerInventory : MonoBehaviour
         {
             resources[type] = 0;
         }
+    }
+    private void OnEnable()
+    {
+        SaveSystem.Instance?.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        SaveSystem.Instance?.Unregister(this);
     }
 
     public void AddResource(ResourceType type, int amount)
@@ -86,5 +95,15 @@ public class PlayerInventory : MonoBehaviour
     public void LoadData(List<ResourceSaveData> data)
     {
         // TODO
+    }
+
+    public void PopulateSaveData(GameData data)
+    {
+        Debug.Log("PopulateSaveData");
+    }
+
+    public void LoadFromSaveData(GameData data)
+    {
+        Debug.Log("LoadFromSaveData");
     }
 }

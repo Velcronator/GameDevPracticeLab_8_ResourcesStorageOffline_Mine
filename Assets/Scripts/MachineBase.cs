@@ -42,15 +42,15 @@ public class MachineBase : MonoBehaviour
         }
     }
 
-    //public MachineSaveData GetSaveData()
-    //{
-    //    return new MachineSaveData
-    //    {
-    //        machineId = MachineId,
-    //        position = transform.position,
-    //        rotation = transform.rotation
-    //    };
-    //}
+    public MachineSaveData GetSaveData()
+    {
+        return new MachineSaveData
+        {
+            machineId = MachineId,
+            position = transform.position,
+            rotation = transform.rotation
+        };
+    }
 
     private void Produce()
     {

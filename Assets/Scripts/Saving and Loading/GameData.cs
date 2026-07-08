@@ -4,10 +4,12 @@ using System.Collections.Generic;
 [Serializable]
 public class GameData
 {
-    public List<ResourceSaveData> bankResources;
-    public List<ResourceSaveData> inventoryResources;
+    public List<ResourceSaveData> bankResources = new();
+    public List<ResourceSaveData> inventoryResources = new();
 
-    public List<BuildAreaSaveData> buildAreas;
+    public List<MachineSaveData> machines = new();
 
     public string saveTimeUtc;
+
+    public int version = 1;
 }

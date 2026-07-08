@@ -1,0 +1,20 @@
+{
+    "bankResources": [
+        {
+            "type": 0,
+            "amount": 10
+        },
+        {
+            "type": 1,
+            "amount": 12
+        },
+        {
+            "type": 2,
+            "amount": 2
+        }
+    ],
+    "inventoryResources": [],
+    "machines": [],
+    "saveTimeUtc": "2026-07-08T04:46:17.8897356Z",
+    "version": 1
+}

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bank : MonoBehaviour, IInteractable
+public class Bank : MonoBehaviour, IInteractable, ISaveable
 {
     public static Bank Instance { get; private set; }
 
@@ -20,6 +20,22 @@ public class Bank : MonoBehaviour, IInteractable
 
         Instance = this;
 
+        InitialiseResources();
+    }
+
+    private void OnEnable()
+    {
+        SaveSystem.Instance?.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        SaveSystem.Instance?.Unregister(this);
+    }
+
+    private void InitialiseResources()
+    {
+        resources.Clear();
         foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
         {
             resources[type] = 0;
@@ -109,21 +125,43 @@ public class Bank : MonoBehaviour, IInteractable
         return true;
     }
 
-    public List<ResourceSaveData> GetSaveData()
-    {
-        return null; // TODO
-    }
-
-    public void LoadData(List<ResourceSaveData> data)
-    {
-        // TODO
-    }
-
     public void PrintContents()
     {
         foreach (var pair in resources)
         {
             Debug.Log($"{pair.Key}: {pair.Value}");
+        }
+    }
+
+    public void PopulateSaveData(GameData data)
+    {
+        data.bankResources.Clear();
+        foreach (KeyValuePair<ResourceType, int> kvp in resources)
+        {
+            ResourceSaveData resourceData = new ResourceSaveData
+            {
+                type = kvp.Key,
+                amount = kvp.Value
+            };
+            data.bankResources.Add(resourceData);
+        }
+    }
+
+    public void LoadFromSaveData(GameData data)
+    {
+        // 1. Wipe the current runtime balances and guarantee all types exist
+        InitialiseResources();
+
+        // 2. Repopulate your runtime dictionary from the loaded list
+        foreach (ResourceSaveData savedResource in data.bankResources)
+        {
+            resources[savedResource.type] = savedResource.amount;
+        }
+
+        // 3. UI Update Trigger: Notify listeners about the new balance for every resource
+        foreach (KeyValuePair<ResourceType, int> kvp in resources)
+        {
+            OnBankChanged?.Invoke(kvp.Key, kvp.Value);
         }
     }
 }
