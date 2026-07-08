@@ -2,19 +2,86 @@
     "bankResources": [
         {
             "type": 0,
-            "amount": 10
+            "amount": 0
         },
         {
             "type": 1,
-            "amount": 12
+            "amount": 0
         },
         {
             "type": 2,
-            "amount": 2
+            "amount": 0
         }
     ],
     "inventoryResources": [],
-    "machines": [],
-    "saveTimeUtc": "2026-07-08T04:46:17.8897356Z",
+    "machines": [
+        {
+            "machineId": "StoneMachine",
+            "position": {
+                "x": 5.059999942779541,
+                "y": 0.0,
+                "z": -1.159999966621399
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        }
+    ],
+    "buildAreas": [
+        {
+            "buildAreaId": "ba3",
+            "hasMachineBuilt": false,
+            "machineName": ""
+        },
+        {
+            "buildAreaId": "ba6",
+            "hasMachineBuilt": true,
+            "machineName": ""
+        },
+        {
+            "buildAreaId": "ba5",
+            "hasMachineBuilt": false,
+            "machineName": ""
+        },
+        {
+            "buildAreaId": "ba8",
+            "hasMachineBuilt": false,
+            "machineName": ""
+        },
+        {
+            "buildAreaId": "ba4",
+            "hasMachineBuilt": false,
+            "machineName": ""
+        },
+        {
+            "buildAreaId": "ba2",
+            "hasMachineBuilt": false,
+            "machineName": ""
+        },
+        {
+            "buildAreaId": "ba9",
+            "hasMachineBuilt": false,
+            "machineName": ""
+        },
+        {
+            "buildAreaId": "ba1",
+            "hasMachineBuilt": false,
+            "machineName": ""
+        },
+        {
+            "buildAreaId": "ba10",
+            "hasMachineBuilt": false,
+            "machineName": ""
+        },
+        {
+            "buildAreaId": "ba7",
+            "hasMachineBuilt": false,
+            "machineName": ""
+        }
+    ],
+    "saveTimeUtc": "2026-07-08T06:20:24.7078613Z",
     "version": 1
 }

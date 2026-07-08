@@ -67,11 +67,8 @@ public class MachineBase : MonoBehaviour
         Instantiate(prefab, resourceSpawnPoint.position, Quaternion.identity);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        if (MachineManager.Instance != null)
-        {
-            MachineManager.Instance.Unregister(this);
-        }
+        MachineManager.Instance.Unregister(this);
     }
 }

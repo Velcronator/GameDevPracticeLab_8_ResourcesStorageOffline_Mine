@@ -7,6 +7,27 @@ public class MachineManager : MonoBehaviour, ISaveable
 
     private readonly List<MachineBase> machines = new();
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
+    private void OnEnable()
+    {
+        SaveSystem.Instance?.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        SaveSystem.Instance?.Unregister(this);
+    }
+
     public void Register(MachineBase machine)
     {
         if (!machines.Contains(machine))
@@ -34,11 +55,44 @@ public class MachineManager : MonoBehaviour, ISaveable
         }
     }
 
-    //public MachineBase SpawnMachine(MachineData data, Vector3 position, Quaternion rotation);
+    public MachineBase SpawnMachine(MachineData data, Vector3 position, Quaternion rotation)
+    {
+        GameObject obj = Instantiate(data.Prefab, position, rotation);
 
-    //public void RemoveMachine(MachineBase machine);
+        MachineBase machine = obj.GetComponent<MachineBase>();
 
-    //public void ClearMachines();
+        if (machine == null)
+        {
+            Debug.LogError("Machine prefab missing MachineBase component.");
+
+            Destroy(obj);
+            return null;
+        }
+
+        machine.Initialise(data);
+
+        return machine;
+    }
+
+    public void RemoveMachine(MachineBase machine)
+    {
+        if (!machines.Contains(machine))
+            return;
+
+        machines.Remove(machine);
+
+        Destroy(machine.gameObject);
+    }
+
+    public void ClearMachines()
+    {
+        foreach (MachineBase machine in machines)
+        {
+            Destroy(machine.gameObject);
+        }
+
+        machines.Clear();
+    }
 
     public int GetMachineCount()
     {
@@ -47,11 +101,30 @@ public class MachineManager : MonoBehaviour, ISaveable
 
     public void PopulateSaveData(GameData data)
     {
-        Debug.Log("LoadFromSaveData");
+        data.machines.Clear();
+
+        foreach (MachineBase machine in machines)
+        {
+            MachineSaveData save = new MachineSaveData
+            {
+                machineId = machine.MachineId,
+                position = machine.transform.position,
+                rotation = machine.transform.rotation
+            };
+
+            data.machines.Add(save);
+        }
     }
 
     public void LoadFromSaveData(GameData data)
     {
-        Debug.Log("LoadFromSaveData");
+        ClearMachines();
+
+        foreach (MachineSaveData save in data.machines)
+        {
+            MachineData machineData = MachineDatabase.Instance.GetMachine(save.machineId);
+
+            SpawnMachine(machineData, save.position, save.rotation);
+        }
     }
 }

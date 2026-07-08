@@ -15,10 +15,7 @@ public class PlayerInventory : MonoBehaviour, ISaveable
     {
         playerThirdPersonVisual = GetComponent<PlayerThirdPersonVisual>();
 
-        foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
-        {
-            resources[type] = 0;
-        }
+        InitialiseResources();
     }
     private void OnEnable()
     {
@@ -28,6 +25,15 @@ public class PlayerInventory : MonoBehaviour, ISaveable
     private void OnDisable()
     {
         SaveSystem.Instance?.Unregister(this);
+    }
+
+    private void InitialiseResources()
+    {
+        resources.Clear();
+        foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
+        {
+            resources[type] = 0;
+        }
     }
 
     public void AddResource(ResourceType type, int amount)
@@ -87,23 +93,35 @@ public class PlayerInventory : MonoBehaviour, ISaveable
         }
     }
 
-    public List<ResourceSaveData> GetSaveData()
-    {
-        return null; // TODO
-    }
-
-    public void LoadData(List<ResourceSaveData> data)
-    {
-        // TODO
-    }
-
     public void PopulateSaveData(GameData data)
     {
-        Debug.Log("PopulateSaveData");
+        data.inventoryResources.Clear();
+        foreach (KeyValuePair<ResourceType, int> kvp in resources)
+        {
+            ResourceSaveData resourceData = new ResourceSaveData
+            {
+                type = kvp.Key,
+                amount = kvp.Value
+            };
+            data.inventoryResources.Add(resourceData);
+        }
     }
 
     public void LoadFromSaveData(GameData data)
     {
-        Debug.Log("LoadFromSaveData");
+        // 1. Wipe the current runtime balances and guarantee all types exist
+        InitialiseResources();
+
+        // 2. Repopulate your runtime dictionary from the loaded list
+        foreach (ResourceSaveData savedResource in data.inventoryResources)
+        {
+            resources[savedResource.type] = savedResource.amount;
+        }
+
+        // 3. UI Update Trigger: Notify listeners about the new balance for every resource
+        foreach (KeyValuePair<ResourceType, int> kvp in resources)
+        {
+            OnResourceAmountChanged?.Invoke(kvp.Key, kvp.Value);
+        }
     }
 }
