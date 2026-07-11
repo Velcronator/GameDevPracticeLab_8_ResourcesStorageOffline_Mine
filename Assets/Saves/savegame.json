@@ -6,7 +6,7 @@
         },
         {
             "type": 1,
-            "amount": 0
+            "amount": 8
         },
         {
             "type": 2,
@@ -21,6 +21,34 @@
                 "x": 5.059999942779541,
                 "y": 0.0,
                 "z": -1.159999966621399
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        },
+        {
+            "machineId": "WoodMachine",
+            "position": {
+                "x": 5.059999942779541,
+                "y": 0.0,
+                "z": 3.309999942779541
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        },
+        {
+            "machineId": "GoldMachine",
+            "position": {
+                "x": -0.7400001287460327,
+                "y": 0.0,
+                "z": 7.430000305175781
             },
             "rotation": {
                 "x": 0.0,
@@ -53,12 +81,12 @@
         },
         {
             "buildAreaId": "ba4",
-            "hasMachineBuilt": false,
+            "hasMachineBuilt": true,
             "machineName": ""
         },
         {
             "buildAreaId": "ba2",
-            "hasMachineBuilt": false,
+            "hasMachineBuilt": true,
             "machineName": ""
         },
         {
@@ -82,6 +110,6 @@
             "machineName": ""
         }
     ],
-    "saveTimeUtc": "2026-07-08T06:20:24.7078613Z",
+    "saveTimeUtc": "2026-07-08T06:39:37.7530343Z",
     "version": 1
 }

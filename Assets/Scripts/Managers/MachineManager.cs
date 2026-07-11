@@ -99,6 +99,30 @@ public class MachineManager : MonoBehaviour, ISaveable
         return machines.Count;
     }
 
+    /// <summary>
+    /// Credits resources each machine would have produced during the offline period.
+    /// Called once per load by SaveSystem, after all save data has been restored.
+    /// </summary>
+    public void ApplyOfflineProgression(double offlineSeconds)
+    {
+        if (offlineSeconds <= 0 || Bank.Instance == null)
+            return;
+
+        foreach (MachineBase machine in machines)
+        {
+            int ticks = Mathf.FloorToInt((float)(offlineSeconds / machine.ProductionInterval));
+
+            if (ticks <= 0)
+                continue;
+
+            int gained = ticks * machine.MachineData.AmountPerTick;
+            Bank.Instance.Deposit(machine.OutputType, gained);
+
+            Debug.Log($"[Offline] {machine.MachineId}: +{gained} {machine.OutputType} " +
+                      $"({ticks} ticks @ 1 per {machine.ProductionInterval}s)");
+        }
+    }
+
     public void PopulateSaveData(GameData data)
     {
         data.machines.Clear();

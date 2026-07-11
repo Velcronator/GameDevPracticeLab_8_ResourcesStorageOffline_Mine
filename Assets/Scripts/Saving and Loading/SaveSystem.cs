@@ -1,12 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
 {
     public static SaveSystem Instance { get; private set; }
+
+    // Cap offline time so players can't abuse extended sessions
+    private const double MaxOfflineSeconds = 8 * 3600; // 8 hours
 
     private string saveFilePath;
     private List<ISaveable> saveableObjects = new();
@@ -25,7 +29,6 @@ public class SaveSystem : MonoBehaviour
         //TODO while testing and Debugging
         string folderPath = Path.Combine(Application.dataPath, "Saves");
         saveFilePath = Path.Combine(folderPath, "savegame.json");
-
     }
 
     private IEnumerator Start()
@@ -73,7 +76,7 @@ public class SaveSystem : MonoBehaviour
             saveable.PopulateSaveData(data);
         }
 
-        // 2. Add a timestamp for offline calculations later
+        // 2. Stamp the current UTC time for offline progression calculations on next load
         data.saveTimeUtc = DateTime.UtcNow.ToString("O");
 
         // 3. Serialize to JSON and write to disk
@@ -114,12 +117,40 @@ public class SaveSystem : MonoBehaviour
                 saveable.LoadFromSaveData(data);
             }
 
+            // 3. Credit resources earned while the game was closed
+            ApplyOfflineProgression(data);
+
             Debug.Log("Game successfully loaded.");
         }
         catch (Exception e)
         {
             Debug.LogError($"Failed to load game: {e.Message}");
         }
+    }
+
+    private void ApplyOfflineProgression(GameData data)
+    {
+        if (string.IsNullOrEmpty(data.saveTimeUtc))
+            return;
+
+        if (!DateTime.TryParse(data.saveTimeUtc, null,
+                DateTimeStyles.RoundtripKind, out DateTime lastSaveUtc))
+        {
+            Debug.LogWarning("[Offline] Could not parse saveTimeUtc. Skipping offline progression.");
+            return;
+        }
+
+        double rawSeconds = (DateTime.UtcNow - lastSaveUtc).TotalSeconds;
+        double offlineSeconds = Math.Min(rawSeconds, MaxOfflineSeconds);
+
+        if (offlineSeconds <= 0)
+            return;
+
+        string rawFormatted = TimeSpan.FromSeconds(rawSeconds).ToString(@"hh\:mm\:ss");
+        string capFormatted = TimeSpan.FromSeconds(offlineSeconds).ToString(@"hh\:mm\:ss");
+        Debug.Log($"[Offline] Away for {rawFormatted}. Applying {capFormatted} of progression.");
+
+        MachineManager.Instance?.ApplyOfflineProgression(offlineSeconds);
     }
 
     public bool HasSave()
